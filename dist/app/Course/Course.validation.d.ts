@@ -1,0 +1,30 @@
+import { z } from "zod";
+export declare const courseValidationSchema: z.ZodObject<{
+    id: z.ZodNumber;
+    title: z.ZodString;
+    slug: z.ZodString;
+    category: z.ZodString;
+    type: z.ZodString;
+    image: z.ZodString;
+    fee: z.ZodString;
+    rating: z.ZodNumber;
+    totalRating: z.ZodNumber;
+    totalStudentsEnroll: z.ZodNumber;
+    mentor: z.ZodString;
+    technology: z.ZodString;
+    courseStart: z.ZodString;
+    durationMonth: z.ZodNumber;
+    lectures: z.ZodNumber;
+    totalExam: z.ZodNumber;
+    totalProject: z.ZodNumber;
+    details: z.ZodString;
+    courseOverview: z.ZodString;
+    curriculum: z.ZodArray<z.ZodString>;
+    courseIncludes: z.ZodArray<z.ZodObject<{
+        icon: z.ZodString;
+        text: z.ZodString;
+    }, z.core.$strip>>;
+    softwareYoullLearn: z.ZodArray<z.ZodString>;
+    jobPositions: z.ZodArray<z.ZodString>;
+}, z.core.$strip>;
+//# sourceMappingURL=Course.validation.d.ts.map
