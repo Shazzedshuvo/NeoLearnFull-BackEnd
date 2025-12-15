@@ -1,33 +1,30 @@
-import type { IUser } from "./user.intarfase.js";
-import { UserModel } from "./user.model.js";
 
-export const CreateUsar = async (paylod: IUser) => {
-  const NewUser = await UserModel.create(paylod);
-  return NewUser;
+import { UserModel, type IUser } from "./user.model.js";
+import type { Document } from "mongoose";
+
+// Create User
+export const CreateUser = async (payload: Partial<IUser>): Promise<IUser & Document> => {
+  const newUser = await UserModel.create(payload);
+  return newUser;
 };
 
-
-
-
-
-const getAllUsersServices = async (): Promise<IUser[]> => {
+// Get all users
+const getAllUsersServices = async (): Promise<(IUser & Document)[]> => {
   const users = await UserModel.find({ isDeleted: false });
   return users;
 };
 
-
-
-const getSingleUserServices = async (id: string)=> {
-
-
+// Get single user by ID
+const getSingleUserServices = async (id: string): Promise<(IUser & Document) | null> => {
   const user = await UserModel.findOne({ _id: id, isDeleted: false });
   return user;
 };
 
-
-
-
-const updateUserServices = async (id: string, payload: Partial<IUser>): Promise<IUser | null> => {
+// Update user
+const updateUserServices = async (
+  id: string,
+  payload: Partial<IUser>
+): Promise<(IUser & Document) | null> => {
   const updatedUser = await UserModel.findOneAndUpdate(
     { id, isDeleted: false },
     payload,
@@ -36,9 +33,10 @@ const updateUserServices = async (id: string, payload: Partial<IUser>): Promise<
   return updatedUser;
 };
 
-
-
-const deleteUserServices = async (id: string): Promise<IUser | null> => {
+// Delete (soft delete) user
+const deleteUserServices = async (
+  id: string
+): Promise<(IUser & Document) | null> => {
   const deletedUser = await UserModel.findOneAndUpdate(
     { id, isDeleted: false },
     { isDeleted: true },
@@ -47,15 +45,10 @@ const deleteUserServices = async (id: string): Promise<IUser | null> => {
   return deletedUser;
 };
 
-
-
-
-
 export const UserServices = {
-  CreateUsar,
-    getAllUsersServices,
-   getSingleUserServices,
-    updateUserServices,
-    deleteUserServices,
-
+  CreateUser,
+  getAllUsersServices,
+  getSingleUserServices,
+  updateUserServices,
+  deleteUserServices,
 };

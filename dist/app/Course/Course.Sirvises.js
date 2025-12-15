@@ -1,34 +1,45 @@
 import { Course } from "./Course.model.js";
+// CREATE
 const createCourseServices = async (payload) => {
-    const newCourse = await Course.create(payload);
-    return newCourse;
+    return await Course.create(payload);
 };
+// GET ALL
 const getAllCoursesServices = async () => {
-    const courses = await Course.find({});
-    return courses;
+    return await Course.find({})
+        .populate("mentor")
+        .populate("category");
 };
+// GET BY ID
 const getSingleCourseServices = async (id) => {
-    const course = await Course.findOne({ id })
-        .populate('mentor')
-        .populate('category');
-    return course;
+    return await Course.findOne({ id })
+        .populate("mentor")
+        .populate("category");
 };
+// ✅ GET BY SLUG (IMPORTANT)
+const getSingleCourseBySlugServices = async (slug) => {
+    return await Course.findOne({ slug })
+        .populate("mentor")
+        .populate("category");
+};
+// UPDATE
 const updateCourseServices = async (id, payload) => {
-    const updatedCourse = await Course.findOneAndUpdate({ id }, payload, { new: true })
-        .populate('mentor')
-        .populate('category');
-    return updatedCourse;
+    return await Course.findOneAndUpdate({ id }, payload, {
+        new: true,
+    })
+        .populate("mentor")
+        .populate("category");
 };
+// DELETE
 const deleteCourseServices = async (id) => {
-    const deletedCourse = await Course.findOneAndDelete({ id })
-        .populate('mentor')
-        .populate('category');
-    return deletedCourse;
+    return await Course.findOneAndDelete({ id })
+        .populate("mentor")
+        .populate("category");
 };
 export const CourseService = {
     createCourseServices,
     getAllCoursesServices,
     getSingleCourseServices,
+    getSingleCourseBySlugServices,
     updateCourseServices,
     deleteCourseServices,
 };

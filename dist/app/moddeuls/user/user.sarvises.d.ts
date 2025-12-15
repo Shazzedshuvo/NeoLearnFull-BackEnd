@@ -1,22 +1,11 @@
-import type { IUser } from "./user.intarfase.js";
-export declare const CreateUsar: (paylod: IUser) => Promise<import("mongoose").Document<unknown, {}, IUser, {}, {}> & IUser & Required<{
-    _id: string;
-}> & {
-    __v: number;
-}>;
+import { type IUser } from "./user.model.js";
+import type { Document } from "mongoose";
+export declare const CreateUser: (payload: Partial<IUser>) => Promise<IUser & Document>;
 export declare const UserServices: {
-    CreateUsar: (paylod: IUser) => Promise<import("mongoose").Document<unknown, {}, IUser, {}, {}> & IUser & Required<{
-        _id: string;
-    }> & {
-        __v: number;
-    }>;
-    getAllUsersServices: () => Promise<IUser[]>;
-    getSingleUserServices: (id: string) => Promise<(import("mongoose").Document<unknown, {}, IUser, {}, {}> & IUser & Required<{
-        _id: string;
-    }> & {
-        __v: number;
-    }) | null>;
-    updateUserServices: (id: string, payload: Partial<IUser>) => Promise<IUser | null>;
-    deleteUserServices: (id: string) => Promise<IUser | null>;
+    CreateUser: (payload: Partial<IUser>) => Promise<IUser & Document>;
+    getAllUsersServices: () => Promise<(IUser & Document)[]>;
+    getSingleUserServices: (id: string) => Promise<(IUser & Document) | null>;
+    updateUserServices: (id: string, payload: Partial<IUser>) => Promise<(IUser & Document) | null>;
+    deleteUserServices: (id: string) => Promise<(IUser & Document) | null>;
 };
 //# sourceMappingURL=user.sarvises.d.ts.map

@@ -1,6 +1,8 @@
 import { Types } from 'mongoose';
 
 export interface ICourse {
+
+  
   id: number;
   title: string;
   slug: string;
@@ -30,6 +32,8 @@ export interface ICourse {
   courseIncludes: { icon: string; text: string }[];
   softwareYoullLearn: string[];
   jobPositions: string[];
+
+  
 
   createdAt?: Date;
   updatedAt?: Date;

@@ -1,14 +1,17 @@
-export declare const AuthService: {
-    loginUser: (payload: {
+interface LoginPayload {
+    email: string;
+    password: string;
+}
+interface LoginResponse {
+    token: string;
+    user: {
         id: string;
-        password: string;
-    }) => Promise<{
-        token: string;
-        user: {
-            id: any;
-            role: "student" | "mentor" | "admin";
-            status: "active" | "blocked" | "pending";
-        };
-    }>;
+        role: string;
+        status?: string;
+    };
+}
+export declare const AuthService: {
+    loginUser: (payload: LoginPayload) => Promise<LoginResponse>;
 };
+export {};
 //# sourceMappingURL=auth.sarvises.d.ts.map

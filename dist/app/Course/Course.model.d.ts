@@ -1,4 +1,4 @@
-import type { ICourse } from './Cpurse.Intarfase.js';
+import type { ICourse } from "./Cpurse.Intarfase.js";
 export declare const Course: import("mongoose").Model<ICourse, {}, {}, {}, import("mongoose").Document<unknown, {}, ICourse, {}, {}> & ICourse & {
     _id: import("mongoose").Types.ObjectId;
 } & {

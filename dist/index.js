@@ -13,7 +13,10 @@ import { GalleryRoutes } from "./app/Galary/Galary.Route.js";
 import { WorkingPartnerRoutes } from "./app/WorkingPatnar/workingPartner.route.js";
 const app = express();
 // Middlewares
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true, // ✅ correct
+}));
 app.use(express.json());
 // Routes
 app.get("/", (req, res) => {

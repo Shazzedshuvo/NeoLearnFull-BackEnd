@@ -1,18 +1,17 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 const courseSchema = new Schema({
     id: { type: Number, required: true, unique: true },
     title: { type: String, required: true },
-    slug: { type: String, required: true },
-    category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+    slug: { type: String, required: true, unique: true },
+    category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
     type: { type: String, required: true },
     image: { type: String, required: true },
     fee: { type: String, required: true },
     rating: { type: Number, required: true },
     totalRating: { type: Number, required: true },
     totalStudentsEnroll: { type: Number, required: true },
-    mentor: { type: Schema.Types.ObjectId, ref: 'Mentor', required: true },
+    mentor: { type: Schema.Types.ObjectId, ref: "Mentor", required: true },
     technology: { type: String, required: true },
-    courseStart: { type: String, required: true },
     durationMonth: { type: Number, required: true },
     lectures: { type: Number, required: true },
     totalExam: { type: Number, required: true },
@@ -29,5 +28,5 @@ const courseSchema = new Schema({
     softwareYoullLearn: [{ type: String, required: true }],
     jobPositions: [{ type: String, required: true }],
 }, { timestamps: true });
-export const Course = model('Course', courseSchema);
+export const Course = model("Course", courseSchema);
 //# sourceMappingURL=Course.model.js.map

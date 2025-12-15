@@ -1,10 +1,9 @@
-// src/app/modules/auth/auth.service.ts
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { UserModel } from "../moddeuls/user/user.model.js";
 const loginUser = async (payload) => {
-    const { id, password } = payload;
-    const user = await UserModel.findOne({ id, isDeleted: false });
+    const { email, password } = payload;
+    const user = await UserModel.findOne({ email, isDeleted: false });
     if (!user) {
         throw new Error("User not found or not active");
     }
@@ -12,7 +11,6 @@ const loginUser = async (payload) => {
     if (!isPasswordMatched) {
         throw new Error("Incorrect password");
     }
-    // Generate JWT
     const token = jwt.sign({
         _id: user._id,
         role: user.role,
@@ -27,7 +25,5 @@ const loginUser = async (payload) => {
         },
     };
 };
-export const AuthService = {
-    loginUser,
-};
+export const AuthService = { loginUser };
 //# sourceMappingURL=auth.sarvises.js.map

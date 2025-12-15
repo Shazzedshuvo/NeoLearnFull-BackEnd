@@ -1,14 +1,19 @@
 import { CourseService } from "./Course.Sirvises.js";
+// CREATE
 export const createCourseController = async (req, res) => {
     try {
         const course = await CourseService.createCourseServices(req.body);
-        res.status(201).json({ success: true, message: "Course created successfully", data: course });
+        res.status(201).json({
+            success: true,
+            message: "Course created successfully",
+            data: course,
+        });
     }
     catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-// GET All Courses
+// GET ALL
 export const getAllCoursesController = async (req, res) => {
     try {
         const courses = await CourseService.getAllCoursesServices();
@@ -18,7 +23,7 @@ export const getAllCoursesController = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-// GET Single Course
+// GET BY ID
 export const getSingleCourseController = async (req, res) => {
     try {
         const id = Number(req.params.id);
@@ -31,27 +36,40 @@ export const getSingleCourseController = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-// UPDATE Course
-export const updateCourseController = async (req, res) => {
+// ✅ GET BY SLUG
+export const getSingleCourseBySlugController = async (req, res) => {
     try {
-        const id = Number(req.params.id);
-        const updatedCourse = await CourseService.updateCourseServices(id, req.body);
-        if (!updatedCourse)
+        const { slug } = req.params;
+        const course = await CourseService.getSingleCourseBySlugServices(slug);
+        if (!course)
             return res.status(404).json({ success: false, message: "Course not found" });
-        res.status(200).json({ success: true, data: updatedCourse });
+        res.status(200).json({ success: true, data: course });
     }
     catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-// DELETE Course
+// UPDATE
+export const updateCourseController = async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const course = await CourseService.updateCourseServices(id, req.body);
+        if (!course)
+            return res.status(404).json({ success: false, message: "Course not found" });
+        res.status(200).json({ success: true, data: course });
+    }
+    catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+// DELETE
 export const deleteCourseController = async (req, res) => {
     try {
         const id = Number(req.params.id);
-        const deletedCourse = await CourseService.deleteCourseServices(id);
-        if (!deletedCourse)
+        const course = await CourseService.deleteCourseServices(id);
+        if (!course)
             return res.status(404).json({ success: false, message: "Course not found" });
-        res.status(200).json({ success: true, data: deletedCourse });
+        res.status(200).json({ success: true, data: course });
     }
     catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -61,6 +79,7 @@ export const CourseController = {
     createCourseController,
     getAllCoursesController,
     getSingleCourseController,
+    getSingleCourseBySlugController,
     updateCourseController,
     deleteCourseController,
 };

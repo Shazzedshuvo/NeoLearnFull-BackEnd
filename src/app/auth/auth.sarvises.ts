@@ -1,13 +1,25 @@
-// src/app/modules/auth/auth.service.ts
-
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { UserModel } from "../moddeuls/user/user.model.js";
 
-const loginUser = async (payload: { id: string; password: string }) => {
-  const { id, password } = payload;
+interface LoginPayload {
+  email: string;
+  password: string;
+}
 
-  const user = await UserModel.findOne({ id, isDeleted: false });
+interface LoginResponse {
+  token: string;
+  user: {
+    id: string;
+    role: string;
+    status?: string;
+  };
+}
+
+const loginUser = async (payload: LoginPayload): Promise<LoginResponse> => {
+  const { email, password } = payload;
+
+  const user = await UserModel.findOne({ email, isDeleted: false });
   if (!user) {
     throw new Error("User not found or not active");
   }
@@ -17,7 +29,6 @@ const loginUser = async (payload: { id: string; password: string }) => {
     throw new Error("Incorrect password");
   }
 
-  // Generate JWT
   const token = jwt.sign(
     {
       _id: user._id,
@@ -38,6 +49,4 @@ const loginUser = async (payload: { id: string; password: string }) => {
   };
 };
 
-export const AuthService = {
-  loginUser,
-};
+export const AuthService = { loginUser };
