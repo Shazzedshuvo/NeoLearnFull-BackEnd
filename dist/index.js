@@ -14,7 +14,7 @@ import { WorkingPartnerRoutes } from "./app/WorkingPatnar/workingPartner.route.j
 const app = express();
 // Middlewares
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: process.env.NEXT_PUBLIC_API_URL,
     credentials: true, // ✅ correct
 }));
 app.use(express.json());
