@@ -18,7 +18,7 @@ const app: Application = express();
 // Middlewares
 app.use(
   cors({
-    origin: process.env.NEXT_PUBLIC_API_URL,
+    origin: "*",
     credentials: true, // ✅ correct
   })
 );
