@@ -18,10 +18,11 @@ const app: Application = express();
 // Middlewares
 app.use(
   cors({
-    origin: "*",
-    credentials: true, // ✅ correct
+    origin: ["https://neo-learn-six.vercel.app", "http://localhost:3000"],
+    credentials: true,
   })
 );
+
 app.use(express.json());
 
 // Routes
